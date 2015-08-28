@@ -1,0 +1,156 @@
+<ServerManagerConfiguration>
+  <ProxyGroup name="sources">
+    <!-- ====== Granite Plugin - Reader ====== -->
+    <SourceProxy name="GraniteReader" class="vtkGraniteReader" label="Granite Reader">
+      <Documentation
+         long_help="Granite Reader long help"
+         short_help="Granite Reader short help">
+      </Documentation>
+
+      <!-- Reader panel properties -->
+      <StringVectorProperty
+            name="FileName"
+            animateable="0"
+            command="setFileName"
+            number_of_elements="1">
+        <FileListDomain name="files"/>
+        <Documentation>
+          This property specifies the file name for the Granite reader.
+        </Documentation>
+      </StringVectorProperty>
+
+      <IntVectorProperty
+            name="VOIBounds"
+            animateable="0"
+            command="setVOIBounds"
+            number_of_elements="6"
+            default_values="0 0 0 0 0 0">
+        <Documentation>
+          This property specifies Volume of Interest (VOI) bounds for the Granite reader.
+        </Documentation>
+      </IntVectorProperty>      
+      <!-- End Panel Properties -->
+
+      <Hints>
+        <ReaderFactory extensions="xfdl"
+                       file_description="Granite File Format" />
+      </Hints>
+    </SourceProxy>
+
+    <!-- ====== Granite Plugin - AMR Reader ====== -->
+    <SourceProxy name="GraniteReaderAMR" class="vtkGraniteReaderAMR" label="Granite AMR Reader">
+      <Documentation
+         long_help="Granite AMR Reader long help"
+         short_help="Granite AMR Reader short help">
+      </Documentation>
+
+      <!-- Reader panel properties -->
+      <StringVectorProperty
+            name="FileName"
+            animateable="0"
+            command="setFileName"
+            number_of_elements="1">
+        <FileListDomain name="files"/>
+        <Documentation>
+          This property specifies the file name for the Granite reader.
+        </Documentation>
+      </StringVectorProperty>	  
+      <!-- End Panel Properties -->
+
+      <Hints>
+        <ReaderFactory extensions="xfdl"
+                       file_description="Granite File Format" />
+      </Hints>
+    </SourceProxy>
+  </ProxyGroup>
+    
+  <!-- ====== Granite Plugin - Writer ====== -->
+  <ProxyGroup name="writers">
+    <WriterProxy name="GraniteWriter" class="vtkGraniteWriter"  label="Granite Writer">
+      <Documentation short_help="Write image data as a Granite file.">
+        Granite writer documentation.
+      </Documentation>
+      <InputProperty command="SetInputConnection"
+                     name="Input">
+        <ProxyGroupDomain name="groups">
+          <Group name="sources" />
+          <Group name="filters" />
+        </ProxyGroupDomain>
+        <DataTypeDomain composite_data_supported="1"
+                        name="input_type">
+          <!--<DataType value="vtkImageData" />-->
+          <DataType value="vtkDataSet" />
+        </DataTypeDomain>
+        <Documentation>
+          The input filter/source whose output dataset is to
+          written to the file.
+        </Documentation>
+      </InputProperty>
+      <StringVectorProperty command="setFileBase"
+                            name="FileName"
+                            number_of_elements="1">
+        <Documentation>The name of the file to be written.</Documentation>
+      </StringVectorProperty>
+      <IntVectorProperty name="ResampleExtentToBounds"
+                         command="setResample"
+                         number_of_elements="1"
+                         default_values="1">
+        <BooleanDomain name="bool"/>
+      </IntVectorProperty>
+      <IntVectorProperty name="MultiresolutionCountAndSteps"
+                         command="setMultiresolution"
+                         number_of_elements="2"
+                         default_values="1 1">
+      </IntVectorProperty>
+      <Hints>
+        <Property name="Input"
+                  show="0" />
+        <Property name="FileName"
+                  show="0" />
+        <WriterFactory extensions="xfdl"
+                       file_description="Granite Files" />
+      </Hints>
+    </WriterProxy>
+  </ProxyGroup>
+
+  <!-- ====== Granite Plugin - Settings ====== -->
+  <ProxyGroup name="settings">
+    <SettingsProxy name="GraniteSettings" class="vtkGraniteSettings" label="Granite Settings" processes="client|dataserver|renderserver" >
+      <StringVectorProperty
+            name="GraniteFileName"
+            animateable="0"
+            command="setGraniteFileName"
+            number_of_elements="1">
+        <FileListDomain name="files"/>
+        <Documentation>
+          This property specifies the file name for the Granite library.
+        </Documentation>
+        <Hints>
+          <RestartRequired />
+        </Hints>
+      </StringVectorProperty>
+      <StringVectorProperty
+            name="AdditionalJavaArguments"
+            animateable="0"
+            command="setJavaArguments"
+            number_of_elements="1">
+        <Documentation>
+          This property specifies additional arguments for the Java VM
+        </Documentation>
+        <Hints>
+          <RestartRequired />
+        </Hints>
+      </StringVectorProperty>
+      <IntVectorProperty
+            name="AMRDivisions"
+            animateable="0"
+            command="setAMRDivisions"
+            number_of_elements="1"
+            default_values="3">
+        <Documentation>
+          This property specifies the number of subblock divisions for AMR data sets.
+        </Documentation>
+      </IntVectorProperty>      	  
+    </SettingsProxy>
+  </ProxyGroup>
+</ServerManagerConfiguration>
