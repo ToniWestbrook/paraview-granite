@@ -6,7 +6,11 @@ OVERVIEW
 The Granite Plugin for ParaView is designed to provide interoperability
 between the ParaView/VTK framework and the UNH Granite Scientific Database
 System.  It extends ParaView by providing multi-featured Reader and Writer
-modules to accomplish this functionality.  Specific features are as follows:
+modules to accomplish this functionality.  
+
+Example images and videos can be seen at the [author's blog](http://www.toniwestbrook.com/archives/818).
+
+Specific features are as follows:
 
   1. Reader
     1. Opens standard Granite XFDL files to visualize uniform rectilinear data
